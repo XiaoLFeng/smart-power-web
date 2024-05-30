@@ -10,13 +10,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <section class="relative flex flex-wrap lg:h-screen lg:items-center">
+  <div class="relative flex flex-wrap lg:h-screen lg:items-center">
     <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
       <div class="mx-auto max-w-lg text-center">
         <h1 class="text-2xl font-bold sm:text-3xl">用户登录</h1>
 
         <p class="mt-4 text-gray-500">
-          智电管家「SmartPower Manager」是一款基于Golang(GoFrame)框架的用电管理系统，
+          智电管家「SmartPower Manager」是一款基于Golang(GoFrame)框架的用电管理系统.
         </p>
       </div>
 
@@ -80,5 +80,5 @@ export default defineComponent({
           src="@/assets/images/login_background.webp"
       />
     </div>
-  </section>
+  </div>
 </template>

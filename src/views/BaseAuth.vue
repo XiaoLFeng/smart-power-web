@@ -13,6 +13,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <RouterView/>
+  <section class="bg-white">
+    <RouterView/>
+  </section>
 </template>
 
