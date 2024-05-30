@@ -11,9 +11,5 @@ export default defineComponent({
 </script>
 
 <template>
-
+  <div/>
 </template>
-
-<style scoped>
-
-</style>
