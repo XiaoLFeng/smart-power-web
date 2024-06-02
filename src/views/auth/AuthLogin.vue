@@ -1,7 +1,6 @@
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
 import {AuthLoginAPI} from "@/apis/AuthApi";
-import type {AuthLoginDTO} from "@/models/dto/AuthLoginDTO";
 import {message} from "ant-design-vue";
 
 export default defineComponent({
@@ -27,7 +26,7 @@ export default defineComponent({
         }, 500)
       } else {
         // 用户登录失败
-        console.error(getRes.error_message)
+        message.warn(getRes.error_message)
       }
     }
   }

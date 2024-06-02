@@ -1,11 +1,37 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
+import {AuthRegisterAPI} from "@/apis/AuthApi";
+import {message} from "ant-design-vue";
 
 export default defineComponent({
   name: "AuthRegister",
   created() {
     document.title = '智电管家 - 用户注册'
   },
+  data() {
+    return {
+      formData: {} as AuthRegisterDTO,
+      passwordConfirm: ""
+    }
+  },
+  methods: {
+    async formSubmit() {
+      // 密码检查
+      if (this.formData.password !== this.passwordConfirm) {
+        message.warn("两次输入的密码不一致")
+        return
+      }
+      const getRes = await AuthRegisterAPI(this.formData);
+      if (getRes.output === "Success") {
+        // 用户注册成功
+        message.success("用户注册成功，请登录")
+        this.$router.push({name: "AuthLogin", replace: true})
+      } else {
+        // 用户注册失败
+        message.warn(getRes.error_message)
+      }
+    }
+  }
 })
 </script>
 
@@ -20,7 +46,7 @@ export default defineComponent({
 
       <div class="hidden lg:relative lg:block lg:p-12">
         <a class="block text-white" @click="$router.push({name: 'BaseIndex', replace: true})">
-          <img class="h-8 sm:h-10 w-auto rounded-full" src="@/assets/images/favicon.webp" alt="WebLogo">
+          <img alt="WebLogo" class="h-8 sm:h-10 w-auto rounded-full" src="@/assets/images/favicon.webp">
         </a>
 
         <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
@@ -42,7 +68,7 @@ export default defineComponent({
               class="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
               @click="$router.push({name: 'BaseIndex', replace: true})"
           >
-            <img class="h-8 sm:h-10 w-auto rounded-full" src="@/assets/images/favicon.webp" alt="WebLogo">
+            <img alt="WebLogo" class="h-8 sm:h-10 w-auto rounded-full" src="@/assets/images/favicon.webp">
           </a>
 
           <h1 class="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
@@ -54,13 +80,14 @@ export default defineComponent({
           </p>
         </div>
 
-        <form class="grid grid-cols-6 gap-6 w-full">
+        <form class="grid grid-cols-6 gap-6 w-full" @submit.prevent="formSubmit()">
           <div class="col-span-6">
             <label class="block text-sm font-medium text-gray-700">用户名</label>
             <input
                 id="username"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 name="username"
+                v-model="formData.username"
                 type="text"
             />
           </div>
@@ -70,6 +97,7 @@ export default defineComponent({
                 id="email"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 name="email"
+                v-model="formData.email"
                 type="email"
             />
           </div>
@@ -79,6 +107,7 @@ export default defineComponent({
                 id="phone"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 name="phone"
+                v-model="formData.phone"
                 type="text"
             />
           </div>
@@ -88,6 +117,7 @@ export default defineComponent({
                 id="company_name"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 name="company_name"
+                v-model="formData.company"
                 type="text"
             />
           </div>
@@ -97,6 +127,7 @@ export default defineComponent({
                 id="company_representative"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 name="company_representative"
+                v-model="formData.representative"
                 type="text"
             />
           </div>
@@ -106,6 +137,7 @@ export default defineComponent({
                 id="company_cods"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 name="company_cods"
+                v-model="formData.company_cods"
                 type="text"
             />
           </div>
@@ -115,6 +147,7 @@ export default defineComponent({
                 id="company_address"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 name="company_address"
+                v-model="formData.company_address"
                 type="text"
             />
           </div>
@@ -124,6 +157,7 @@ export default defineComponent({
                 id="password"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 name="password"
+                v-model="formData.password"
                 type="password"
             />
           </div>
@@ -133,6 +167,7 @@ export default defineComponent({
                 id="password_confirm"
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 name="password_confirm"
+                v-model="passwordConfirm"
                 type="password"
             />
           </div>
@@ -155,7 +190,10 @@ export default defineComponent({
 
             <p class="mt-4 text-sm text-gray-500 sm:mt-0 flex">
               <span class="pe-1">已经有帐户?</span>
-              <button class="transition text-gray-700 underline hover:text-gray-800" type="button" @click="$router.push({name: 'AuthLogin'})">登陆</button>.
+              <button class="transition text-gray-700 underline hover:text-gray-800" type="button"
+                      @click="$router.push({name: 'AuthLogin'})">登陆
+              </button>
+              .
             </p>
           </div>
         </form>
