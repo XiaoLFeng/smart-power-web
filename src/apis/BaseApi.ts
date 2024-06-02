@@ -47,6 +47,7 @@ async function BaseApi<E>(
     }).then((response: AxiosResponse<any, any>) => {
         return response.data;
     }).catch((error) => {
+        console.error("[API] 请求出现问题", error);
         const getResponse: BaseResponse<any> = error.response.data
         if (getResponse) {
             return getResponse;
@@ -100,4 +101,13 @@ const pushHeader = (headers: any): any => {
     }
 }
 
-export {BaseApi, MethodType};
+function GetAuthorizationToken(): string {
+    const token = localStorage.getItem("authorization");
+    if (token) {
+        return token.replace("Bearer ", "");
+    } else {
+        return ""
+    }
+}
+
+export {BaseApi, MethodType, GetAuthorizationToken};
