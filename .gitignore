@@ -30,4 +30,4 @@ coverage
 *.tsbuildinfo
 
 ### 自定义 ###
-pack
+package-lock.json

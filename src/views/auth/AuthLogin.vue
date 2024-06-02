@@ -1,11 +1,36 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, ref} from 'vue'
+import {AuthLoginAPI} from "@/apis/AuthApi";
+import type {AuthLoginDTO} from "@/models/dto/AuthLoginDTO";
+import {message} from "ant-design-vue";
 
 export default defineComponent({
   name: "AuthLogin",
   created() {
     document.title = '智电管家 - 用户登录'
   },
+  data() {
+      return {
+        formData: ref<AuthLoginDTO>({} as AuthLoginDTO)
+      }
+  },
+  methods: {
+    async formSubmit() {
+      const getRes = await AuthLoginAPI(this.formData);
+      if (getRes.output === "Success") {
+        // 用户登录成功
+        message.success("您好 " + getRes.data?.user.username + " 欢迎回来")
+        // 设置用户已登录
+        localStorage.setItem("authorization", "Bearer " + getRes.data?.token)
+        setTimeout(() => {
+          this.$router.push({name: "DashHome", replace: true})
+        }, 500)
+      } else {
+        // 用户登录失败
+        console.error(getRes.error_message)
+      }
+    }
+  }
 })
 </script>
 
@@ -20,15 +45,16 @@ export default defineComponent({
         </p>
       </div>
 
-      <form action="#" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+      <form class="mx-auto mb-0 mt-8 max-w-md space-y-4" @submit.prevent="formSubmit()">
         <div>
-          <label class="sr-only" for="email">Email</label>
+          <label class="sr-only" for="user">User</label>
 
           <div class="relative">
             <input
                 class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md border"
-                placeholder="输入用户名"
-                type="email"
+                placeholder="输入用户名/邮箱/手机号码"
+                v-model="formData.user"
+                type="text"
             />
 
             <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -46,6 +72,7 @@ export default defineComponent({
             <input
                 class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-md border"
                 placeholder="请输入密码"
+                v-model="formData.password"
                 type="password"
             />
 
