@@ -14,9 +14,7 @@ export default defineComponent({
   },
   async created() {
     const getUserCurrent = await this.userCurrent
-    if (getUserCurrent.output === "Success") {
-      document.title = '仪表盘 - 你好' + getUserCurrent.data?.user.username
-    } else {
+    if (getUserCurrent.output !== "Success") {
       localStorage.removeItem("authorization")
       this.$router.replace({name: "AuthLogin", replace: true})
     }
@@ -30,8 +28,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex bg-gradient-to-r from-gray-200 to-gray-300/75">
+    <div>
       <HeaderMenu/>
+    </div>
+    <div class="w-full">
+      <RouterView/>
+    </div>
   </div>
 </template>
 
