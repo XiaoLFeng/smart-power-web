@@ -23,3 +23,17 @@ type ElectricityAllEntity = {
     total: number;
     electricity: ElectricityEntity[];
 };
+
+type RateEntity = {
+    id: number;
+    periodAt: string;
+    valleyRate: number;
+    peakRate: number;
+    createdAt: string;
+    updatedAt: string;
+};
+
+type RateDataEntity = {
+    total: number;
+    rate: RateEntity[];
+};

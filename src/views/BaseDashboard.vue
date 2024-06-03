@@ -1,6 +1,6 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import HeaderMenu from "@/components/dashboard/HeaderMenu.vue";
+import HeaderMenu from "@/components/home/dashboard/HeaderMenu.vue";
 import {UserCurrentAPI} from "@/apis/UserApi";
 
 export default defineComponent({

@@ -1,17 +1,20 @@
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
 import {ElectricityAllAPI} from "@/apis/ElectricityApi";
-import UserPanel from "@/components/dashboard/UserPanel.vue";
+import UserPanel from "@/components/home/dashboard/UserPanel.vue";
 import type {BaseResponse} from "@/models/BaseResponse";
+import {MoneyCollectOutlined, MonitorOutlined} from "@ant-design/icons-vue";
+import DashInfo from "@/components/home/dashboard/DashInfo.vue";
 
 export default defineComponent({
   name: "DashHome",
-  components: {UserPanel},
+  components: {DashInfo, UserPanel, MoneyCollectOutlined, MonitorOutlined},
   inject: ["UserCurrent"],
   data() {
     return {
       getUserCurrent: ref<UserCurrentEntity>({} as UserCurrentEntity),
       getElectricity: ElectricityAllAPI(),
+      getElectricityList: {} as ElectricityAllEntity,
       calculateElectricity: "" as any,
       calculateElectricityBill: "" as any
     }
@@ -22,6 +25,10 @@ export default defineComponent({
       this.getUserCurrent = getRes.data!!
     }
     document.title = '仪表盘 - 你好' + this.getUserCurrent.user.username
+    const getElectricityList = await this.getElectricity
+    if (getElectricityList.output === "Success") {
+      this.getElectricityList = getElectricityList.data!!
+    }
   },
   provide() {
     return {
@@ -35,12 +42,10 @@ export default defineComponent({
 <template>
   <div class="p-16 grid justify-center items-center w-full h-screen gap-8 grid-cols-12">
     <div class="col-span-9 h-full">
-      <div class="block rounded-lg p-4 shadow-sm shadow-indigo-100 bg-white h-full">
-        <div class="m-2">
-
-        </div>
-      </div>
+      <DashInfo/>
     </div>
-    <UserPanel/>
+    <div class="col-span-3 h-full">
+      <UserPanel/>
+    </div>
   </div>
 </template>

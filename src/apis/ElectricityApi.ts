@@ -18,4 +18,21 @@ function ElectricityAllAPI(): Promise<BaseResponse<ElectricityAllEntity>> {
     );
 }
 
-export {ElectricityAllAPI}
+/**
+ * # 电费费率查询
+ * 用作用户查询电费费率信息，用户执行该接口进行电费费率查询操作
+ *
+ * @returns Promise<BaseResponse<RateDataEntity>> 电费费率信息
+ */
+function ElectricityGetRateAPI(): Promise<BaseResponse<RateDataEntity>> {
+    return BaseApi<RateDataEntity>(
+        MethodType.GET,
+        "/api/v1/electric/rate",
+        null,
+        null,
+        null,
+        {Authorization: GetAuthorizationToken()}
+    )
+}
+
+export {ElectricityAllAPI, ElectricityGetRateAPI}
