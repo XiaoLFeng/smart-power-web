@@ -34,6 +34,11 @@ const router = createRouter({
                     path: 'dashboard',
                     name: 'DashHome',
                     component: () => import('@/views/dashboard/DashHome.vue')
+                },
+                {
+                    path: 'account',
+                    name: 'DashAccount',
+                    component: () => import('@/views/dashboard/DashAccount.vue')
                 }
             ]
         }

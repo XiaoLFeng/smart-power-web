@@ -14,6 +14,7 @@
   "dependencies": {
     "ant-design-vue": "^4.2.1",
     "axios": "^1.7.2",
+    "jquery": "^3.7.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
@@ -21,6 +22,7 @@
     "@rushstack/eslint-patch": "^1.8.0",
     "@tailwindcss/forms": "^0.5.7",
     "@tsconfig/node20": "^20.1.4",
+    "@types/jquery": "^3.5.30",
     "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/eslint-config-typescript": "^13.0.0",
