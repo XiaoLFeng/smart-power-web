@@ -4,10 +4,11 @@ import {ElectricityAllAPI} from "@/apis/ElectricityApi";
 import {DeleteOutlined, EditOutlined, EyeOutlined, MonitorOutlined} from "@ant-design/icons-vue";
 import ModalCheck from "@/components/home/electricity/ModalCheck.vue";
 import ModalEdit from "@/components/home/electricity/ModalEdit.vue";
+import ModalDelete from "@/components/home/electricity/ModalDelete.vue";
 
 export default defineComponent({
   name: "DashElectricity",
-  components: {ModalEdit, ModalCheck, MonitorOutlined, EditOutlined, DeleteOutlined, EyeOutlined},
+  components: {ModalDelete, ModalEdit, ModalCheck, MonitorOutlined, EditOutlined, DeleteOutlined, EyeOutlined},
   data() {
     return {
       getElectricity: {} as ElectricityAllEntity,
@@ -24,21 +25,21 @@ export default defineComponent({
     async getElectricityFunc() {
       const getRes = await ElectricityAllAPI();
       if (getRes.output === "Success") {
-      this.getElectricity = getRes.data!!
-      if (this.getElectricity.electricity.length === 0) {
-        this.calculateElectricity = 0.0
-        this.calculateElectricityBill = 0.0
-      } else {
-        // 统计总电价
-        this.getElectricity.electricity.forEach((item: ElectricityEntity) => {
-          this.calculateElectricity += item.total_electricity
-        });
-        // 统计总电费
-        this.getElectricity.electricity.forEach((item: ElectricityEntity) => {
-          this.calculateElectricityBill += item.total_bill
-        });
+        this.getElectricity = getRes.data!!
+        if (this.getElectricity.electricity.length === 0) {
+          this.calculateElectricity = 0.0
+          this.calculateElectricityBill = 0.0
+        } else {
+          // 统计总电价
+          this.getElectricity.electricity.forEach((item: ElectricityEntity) => {
+            this.calculateElectricity += item.total_electricity
+          });
+          // 统计总电费
+          this.getElectricity.electricity.forEach((item: ElectricityEntity) => {
+            this.calculateElectricityBill += item.total_bill
+          });
+        }
       }
-    }
     }
   },
   async created() {
@@ -104,7 +105,8 @@ export default defineComponent({
                       <EditOutlined/>
                     </button>
                     <button
-                        class="py-1 px-3 text-gray-700 hover:bg-red-200 focus:relative flex items-center bg-red-100">
+                        class="py-1 px-3 text-gray-700 hover:bg-red-200 focus:relative flex items-center bg-red-100"
+                        @click="() => {modalDelete = true; modalCheckUUID = value.ce_uuid}">
                       <DeleteOutlined/>
                     </button>
                   </span>
@@ -142,9 +144,8 @@ export default defineComponent({
     </div>
   </div>
   <ModalCheck :ce-uuid="modalCheckUUID" :show-modal="modalCheck" @updateModal="(val) => modalCheck = val"/>
-  <ModalEdit :ce-uuid="modalCheckUUID" :show-modal="modalEdit" @updateModal="(val) => modalEdit = val" @isNew="(val) => hasUpdate = val"/>
+  <ModalEdit :ce-uuid="modalCheckUUID" :show-modal="modalEdit" @isNew="(val) => hasUpdate = val"
+             @updateModal="(val) => modalEdit = val"/>
+  <ModalDelete :ce-uuid="modalCheckUUID" :show-modal="modalDelete" @isNew="(val) => hasUpdate = val"
+               @updateModal="(val) => modalDelete = val"/>
 </template>
-
-<style scoped>
-
-</style>

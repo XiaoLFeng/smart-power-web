@@ -72,4 +72,23 @@ function ElectricityEditAPI(getData: ElectricEditDTO): Promise<BaseResponse<null
     );
 }
 
-export {ElectricityAllAPI, ElectricityGetRateAPI, ElectricityGetSingleAPI, ElectricityEditAPI}
+/**
+ * # 电费删除
+ * 用作用户删除电费信息，用户执行该接口进行电费删除操作
+ *
+ * @param ceUUID 电费主键 UUID
+ * @returns Promise<BaseResponse<null>> 电费删除结果
+ */
+function ElectricityDeleteAPI(ceUUID: string): Promise<BaseResponse<null>> {
+    return BaseApi<null>(
+        MethodType.DELETE,
+        "/api/v1/electric",
+        null,
+        {ce_uuid: ceUUID},
+        null,
+        {Authorization: GetAuthorizationToken()}
+    );
+
+}
+
+export {ElectricityAllAPI, ElectricityGetRateAPI, ElectricityGetSingleAPI, ElectricityEditAPI, ElectricityDeleteAPI}

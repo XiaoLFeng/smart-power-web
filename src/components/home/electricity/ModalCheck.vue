@@ -79,6 +79,14 @@ export default defineComponent({
           <dt class="font-medium text-gray-900 text-end">总电费</dt>
           <dd class="text-gray-700 sm:col-span-2">{{ getElectricity.electricity?.total_bill }} 元</dd>
         </div>
+        <div class="grid grid-cols-1 gap-1 py-1 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-gray-900 text-end">创建时间</dt>
+          <dd class="text-gray-700 sm:col-span-2">{{ getElectricity.electricity?.created_at }} 元</dd>
+        </div>
+        <div class="grid grid-cols-1 gap-1 py-1 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+          <dt class="font-medium text-gray-900 text-end">更新时间</dt>
+          <dd class="text-gray-700 sm:col-span-2">{{ getElectricity.electricity?.updated_at }} 元</dd>
+        </div>
       </dl>
     </div>
     <template #footer>
