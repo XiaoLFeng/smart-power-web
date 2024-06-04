@@ -3,10 +3,11 @@ import {defineComponent, ref} from 'vue'
 import {message} from "ant-design-vue";
 import {DashboardOutlined} from "@ant-design/icons-vue";
 import $ from "jquery";
+import DashboardMenu from "@/components/DashboardMenu.vue";
 
 export default defineComponent({
   name: "HeaderMenu",
-  components: {DashboardOutlined},
+  components: {DashboardMenu, DashboardOutlined},
   inject: ['UserCurrent'],
   data() {
     return {
@@ -20,20 +21,20 @@ export default defineComponent({
       const getFirstLetter = await this.UserCurrent()
       this.getFirstLetterCapitalized = getFirstLetter.data?.user.username.charAt(0).toUpperCase()
     }
-    $("#GClass").toggleClass("invisible").fadeOut(0)
+    $("#DashboardMenu").toggleClass("invisible").fadeOut(0)
   },
   mounted() {
     let timeoutID: number | null = null;
 
-    $("#Dashboard, #GClass").hover(() => {
+    $("#Dashboard, #DashboardMenu").hover(() => {
       if (timeoutID) {
         clearTimeout(timeoutID);
         timeoutID = null;
       }
-      $("#GClass").fadeIn(200);
+      $("#DashboardMenu").fadeIn(200);
     }, () => {
       timeoutID = setTimeout(() => {
-        $("#GClass").fadeOut(200);
+        $("#DashboardMenu").fadeOut(200);
       }, 100);
     })
   },
@@ -110,9 +111,9 @@ export default defineComponent({
                   </svg>
 
                   <span
-                      class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
+                      class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible w-max"
                   >
-                    Account
+                    账户
                   </span>
                 </a>
               </li>
@@ -149,137 +150,6 @@ export default defineComponent({
         </button>
       </div>
     </div>
-
-    <div id="GClass" class="invisible flex h-screen flex-1 flex-col justify-between border-e bg-white min-w-52">
-      <div class="px-4 py-6">
-        <ul class="mt-14 space-y-1">
-          <li>
-            <a
-                class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
-                href="#"
-            >
-              General
-            </a>
-          </li>
-
-          <li>
-            <details class="group [&_summary::-webkit-details-marker]:hidden">
-              <summary
-                  class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                <span class="text-sm font-medium"> Teams </span>
-
-                <span class="shrink-0 transition duration-300 group-open:-rotate-180">
-                  <svg
-                      class="h-5 w-5"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                        clip-rule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        fill-rule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </summary>
-
-              <ul class="mt-2 space-y-1 px-4">
-                <li>
-                  <a
-                      class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                      href="#"
-                  >
-                    Banned Users
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                      class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                      href="#"
-                  >
-                    Calendar
-                  </a>
-                </li>
-              </ul>
-            </details>
-          </li>
-
-          <li>
-            <a
-                class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                href="#"
-            >
-              Billing
-            </a>
-          </li>
-
-          <li>
-            <a
-                class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                href="#"
-            >
-              Invoices
-            </a>
-          </li>
-
-          <li>
-            <details class="group [&_summary::-webkit-details-marker]:hidden">
-              <summary
-                  class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                <span class="text-sm font-medium"> Account </span>
-
-                <span class="shrink-0 transition duration-300 group-open:-rotate-180">
-                  <svg
-                      class="h-5 w-5"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                        clip-rule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        fill-rule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </summary>
-
-              <ul class="mt-2 space-y-1 px-4">
-                <li>
-                  <a
-                      class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                      href="#"
-                  >
-                    Details
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                      class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                      href="#"
-                  >
-                    Security
-                  </a>
-                </li>
-
-                <li>
-                  <button
-                      class="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
-                      @click="logoutSubmit()"
-                  >
-                    登出
-                  </button>
-                </li>
-              </ul>
-            </details>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <DashboardMenu/>
   </div>
 </template>

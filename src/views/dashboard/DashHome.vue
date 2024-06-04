@@ -3,12 +3,11 @@ import {defineComponent, ref} from 'vue'
 import {ElectricityAllAPI} from "@/apis/ElectricityApi";
 import UserPanel from "@/components/home/dashboard/UserPanel.vue";
 import type {BaseResponse} from "@/models/BaseResponse";
-import {MoneyCollectOutlined, MonitorOutlined} from "@ant-design/icons-vue";
 import DashInfo from "@/components/home/dashboard/DashInfo.vue";
 
 export default defineComponent({
   name: "DashHome",
-  components: {DashInfo, UserPanel, MoneyCollectOutlined, MonitorOutlined},
+  components: {DashInfo, UserPanel},
   inject: ["UserCurrent"],
   data() {
     return {

@@ -32,7 +32,44 @@ function ElectricityGetRateAPI(): Promise<BaseResponse<RateDataEntity>> {
         null,
         null,
         {Authorization: GetAuthorizationToken()}
-    )
+    );
 }
 
-export {ElectricityAllAPI, ElectricityGetRateAPI}
+/**
+ * # 电费单条查询
+ * 用作用户查询单条电费信息，用户执行该接口进行单条电费查询操作
+ *
+ * @param ceUUID 电费主键 UUID
+ * @param timePicker 时间选择器
+ * @returns Promise<BaseResponse<ElectricitySingleEntity>> 单条电费信息
+ */
+function ElectricityGetSingleAPI(ceUUID: string, timePicker: string): Promise<BaseResponse<ElectricitySingleEntity>> {
+    return BaseApi<ElectricitySingleEntity>(
+        MethodType.GET,
+        "/api/v1/electric",
+        null,
+        {ce_uuid: ceUUID, time_picker: timePicker},
+        null,
+        {Authorization: GetAuthorizationToken()}
+    );
+}
+
+/**
+ * # 电费编辑
+ * 用作用户编辑电费信息，用户执行该接口进行电费编辑操作
+ *
+ * @param getData 电费编辑数据
+ * @returns Promise<BaseResponse<null>> 电费编辑结果
+ */
+function ElectricityEditAPI(getData: ElectricEditDTO): Promise<BaseResponse<null>> {
+    return BaseApi<null>(
+        MethodType.PUT,
+        "/api/v1/electric",
+        getData,
+        null,
+        null,
+        {Authorization: GetAuthorizationToken()}
+    );
+}
+
+export {ElectricityAllAPI, ElectricityGetRateAPI, ElectricityGetSingleAPI, ElectricityEditAPI}

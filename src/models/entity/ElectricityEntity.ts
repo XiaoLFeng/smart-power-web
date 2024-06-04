@@ -24,6 +24,11 @@ type ElectricityAllEntity = {
     electricity: ElectricityEntity[];
 };
 
+type ElectricitySingleEntity = {
+    company: CompanyEntity;
+    electricity: ElectricityEntity;
+}
+
 type RateEntity = {
     id: number;
     periodAt: string;

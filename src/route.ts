@@ -36,6 +36,16 @@ const router = createRouter({
                     component: () => import('@/views/dashboard/DashHome.vue')
                 },
                 {
+                    path: 'electricity',
+                    name: 'DashElectricity',
+                    component: () => import('@/views/dashboard/DashElectricity.vue')
+                },
+                {
+                    path: 'price',
+                    name: 'DashPrice',
+                    component: () => import('@/views/dashboard/DashPrice.vue')
+                },
+                {
                     path: 'account',
                     name: 'DashAccount',
                     component: () => import('@/views/dashboard/DashAccount.vue')

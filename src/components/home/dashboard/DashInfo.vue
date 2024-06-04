@@ -66,9 +66,9 @@ export default defineComponent({
       </div>
       <div class="text-2xl flex items-center font-bold mb-3">
         <MonitorOutlined class="pe-3"/>
-        <span>电费明细</span>
+        <span>近期明细</span>
       </div>
-      <div class="w-full ">
+      <div class="w-full">
         <div class="overflow-x-auto">
           <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
             <thead class="text-left">
@@ -83,18 +83,18 @@ export default defineComponent({
             </thead>
 
             <tbody class="divide-y divide-gray-200">
-            <tr v-for="(value, index) in getElectricityList.electricity" :key="index" class="odd:bg-gray-50">
-              <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ value.period_at }}</td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ value.valley_electricity }}<span
-                  class="font-medium">度</span></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ value.peak_electricity }}<span
-                  class="font-medium">度</span></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ value.valley_electricity_bill }}<span
-                  class="font-medium">元</span></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ value.peak_electricity_bill }}<span
-                  class="font-medium">元</span></td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ value.updated_at }}</td>
-            </tr>
+              <tr v-for="(value, index) in getElectricityList.electricity" :key="index" class="odd:bg-gray-50">
+                <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ value.period_at }}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ value.valley_electricity }}<span
+                    class="font-medium">度</span></td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ value.peak_electricity }}<span
+                    class="font-medium">度</span></td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ value.valley_electricity_bill }}<span
+                    class="font-medium">元</span></td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-900">{{ value.peak_electricity_bill }}<span
+                    class="font-medium">元</span></td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ value.updated_at }}</td>
+              </tr>
             </tbody>
           </table>
         </div>
