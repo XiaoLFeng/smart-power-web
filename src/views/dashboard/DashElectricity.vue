@@ -71,7 +71,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="p-16 grid grid-cols-12 gap-8">
+  <div class="p-16 grid grid-cols-12 gap-8 h-dvh">
     <div class="col-span-9">
       <div class="block rounded-lg p-4 shadow-sm shadow-indigo-100 bg-white gap-3">
         <div class="grid justify-between">

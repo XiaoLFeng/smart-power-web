@@ -9,19 +9,19 @@ export default defineComponent({
   data() {
     return {
       getFirstLetterCapitalized: "",
-      userCurrent: UserCurrentAPI()
+      userCurrent: UserCurrentAPI(),
     }
   },
   async created() {
     const getUserCurrent = await this.userCurrent
     if (getUserCurrent.output !== "Success") {
-      localStorage.removeItem("authorization")
-      this.$router.replace({name: "AuthLogin", replace: true})
+      localStorage.removeItem("authorization");
+      this.$router.replace({name: "AuthLogin", replace: true});
     }
   },
   provide() {
     return {
-      UserCurrent: () => this.userCurrent
+      UserCurrent: () => this.userCurrent,
     }
   }
 })
@@ -29,15 +29,11 @@ export default defineComponent({
 
 <template>
   <div class="flex bg-gradient-to-r from-gray-200 to-gray-300/75">
-    <div>
+    <div class="fixed left-0 top-0">
       <HeaderMenu/>
     </div>
-    <div class="w-full">
+    <div class="w-full ps-16">
       <RouterView/>
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

@@ -1,4 +1,4 @@
-import {BaseApi, MethodType} from "@/apis/BaseApi";
+import {BaseApi, GetAuthorizationToken, MethodType} from "@/apis/BaseApi";
 import type {BaseResponse} from "@/models/BaseResponse";
 
 /**
@@ -23,4 +23,16 @@ function AuthRegisterAPI(getData: AuthRegisterDTO): Promise<BaseResponse<null>> 
     return BaseApi<null>(MethodType.POST, "/api/v1/auth/register", getData, null, null, null);
 }
 
-export {AuthLoginAPI, AuthRegisterAPI}
+/**
+ * # 授权密码修改
+ * 用作用户密码修改授权，用户执行该接口进行用户的密码修改操作
+ *
+ * @param data AuthPasswordDTO 密码修改实体类
+ * @returns Promise<BaseResponse<null>> 修改信息
+ */
+function AuthChangePasswordAPI(data: AuthPasswordDTO): Promise<BaseResponse<null>> {
+    return BaseApi<null>(MethodType.PUT, "/api/v1/auth/password/change", data, null, null,
+        {Authorization: GetAuthorizationToken()});
+}
+
+export {AuthLoginAPI, AuthRegisterAPI, AuthChangePasswordAPI}
