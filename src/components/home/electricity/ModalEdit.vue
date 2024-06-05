@@ -135,7 +135,3 @@ export default defineComponent({
     </a-modal>
   </div>
 </template>
-
-<style scoped>
-
-</style>

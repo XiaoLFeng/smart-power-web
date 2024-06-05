@@ -4,11 +4,16 @@ import type {BaseResponse} from "@/models/BaseResponse";
 
 export default defineComponent({
   name: "UserPanel",
-  inject: ["CUserCurrent", "CElectricity"],
+  inject: ["CUserCurrent"],
+  props: {
+    electricity: {} as ElectricityAllEntity,
+    showModal: Boolean,
+  },
   data() {
     return {
       getUserCurrent: {} as UserCurrentEntity,
       getElectricity: {} as ElectricityAllEntity,
+      open: false,
       calculateElectricity: 0.0,
       calculateElectricityBill: 0.0
     }
@@ -20,23 +25,36 @@ export default defineComponent({
         this.getUserCurrent = getRes.data!!
       }
     }
-    if (typeof this.CElectricity === "function") {
-      const getRes = await this.CElectricity() as BaseResponse<ElectricityAllEntity>
-      if (getRes.output === "Success") {
-        this.getElectricity = getRes.data!!
-        if (this.getElectricity.electricity.length === 0) {
-          this.calculateElectricity = 0.0
-          this.calculateElectricityBill = 0.0
-        } else {
-          // 统计总电价
-          this.getElectricity.electricity.forEach((item: ElectricityEntity) => {
-            this.calculateElectricity += item.total_electricity
-          });
-          // 统计总电费
-          this.getElectricity.electricity.forEach((item: ElectricityEntity) => {
-            this.calculateElectricityBill += item.total_bill
-          });
-        }
+    this.getElectricity = this.electricity.value;
+  },
+  watch: {
+    async hasUpdate(val) {
+      if (val) {
+        await this.getElectricityFunc();
+        this.hasUpdate = false;
+      }
+    },
+    showModal(val) {
+      this.open = val;
+    },
+    open(val) {
+      this.open = val;
+      this.$emit("updateModal", val);
+    },
+    electricity(val) {
+      this.getElectricity = val;
+      if (this.getElectricity.electricity.length === 0) {
+        this.calculateElectricity = 0.0
+        this.calculateElectricityBill = 0.0
+      } else {
+        // 统计总电价
+        this.getElectricity.electricity.forEach((item: ElectricityEntity) => {
+          this.calculateElectricity += item.total_electricity
+        });
+        // 统计总电费
+        this.getElectricity.electricity.forEach((item: ElectricityEntity) => {
+          this.calculateElectricityBill += item.total_bill
+        });
       }
     }
   }
@@ -62,7 +80,7 @@ export default defineComponent({
       <div
           class="flex justify-center rounded-lg p-2 shadow-sm shadow-indigo-100 bg-gradient-to-tr from-blue-200/25 to-blue-400/25">
         <span class="text-lg font-extralight">电费计数</span>
-        <span class="text-lg font-extrabold mx-2">{{ getElectricity.total }}</span>
+        <span class="text-lg font-extrabold mx-2">{{ getElectricity?.total }}</span>
         <span class="text-lg font-extralight">单</span>
       </div>
       <div
@@ -83,6 +101,7 @@ export default defineComponent({
       <div class="flex h-max justify-between items-end gap-3">
         <button
             class="inline-block rounded border border-current w-full py-2 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
+            @click="() => open = true"
         >
           创建电价
         </button>
@@ -95,7 +114,3 @@ export default defineComponent({
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

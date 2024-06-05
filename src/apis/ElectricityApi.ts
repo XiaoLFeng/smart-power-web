@@ -91,4 +91,29 @@ function ElectricityDeleteAPI(ceUUID: string): Promise<BaseResponse<null>> {
 
 }
 
-export {ElectricityAllAPI, ElectricityGetRateAPI, ElectricityGetSingleAPI, ElectricityEditAPI, ElectricityDeleteAPI}
+/**
+ * # 电费添加
+ * 用作用户添加电费信息，用户执行该接口进行电费添加操作
+ *
+ * @param sendData 电费添加数据
+ * @returns Promise<BaseResponse<null>> 电费添加结果
+ */
+function ElectricityAddAPI(sendData: ElectricityAddDTO): Promise<BaseResponse<null>> {
+    return BaseApi<null>(
+        MethodType.POST,
+        "/api/v1/electric",
+        sendData,
+        null,
+        null,
+        {Authorization: GetAuthorizationToken()}
+    );
+}
+
+export {
+    ElectricityAllAPI,
+    ElectricityGetRateAPI,
+    ElectricityGetSingleAPI,
+    ElectricityEditAPI,
+    ElectricityDeleteAPI,
+    ElectricityAddAPI
+}
