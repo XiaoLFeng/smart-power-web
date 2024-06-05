@@ -50,11 +50,11 @@ export default defineComponent({
             <dd class="text-gray-700 sm:col-span-2">{{ getRate.periodAt }}</dd>
           </div>
           <div class="grid grid-cols-1 gap-1 pt-1 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-900">谷电价(度/元)</dt>
+            <dt class="font-medium text-gray-900">谷电价(元/度)</dt>
             <dd class="text-gray-700 sm:col-span-2">{{ getRate.valleyRate }}</dd>
           </div>
           <div class="grid grid-cols-1 gap-1 pt-1 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-900">峰电价(度/元)</dt>
+            <dt class="font-medium text-gray-900">峰电价(元/度)</dt>
             <dd class="text-gray-700 sm:col-span-2">{{ getRate.peakRate }}</dd>
           </div>
           <div class="grid grid-cols-1 gap-1 pt-1 sm:grid-cols-3 sm:gap-4">
