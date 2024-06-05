@@ -6,7 +6,6 @@ import {ElectricityGetRateAPI} from "@/apis/ElectricityApi";
 export default defineComponent({
   name: "DashInfo",
   components: {MoneyCollectOutlined, MonitorOutlined},
-  inject: ['electricity'],
   props: {
     electricity: {} as ElectricityAllEntity
   },

@@ -107,6 +107,7 @@ export default defineComponent({
         </button>
         <button
             class="inline-block rounded border border-current w-full py-2 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
+            @click="$router.push({name: 'DashAccount'})"
         >
           编辑信息
         </button>

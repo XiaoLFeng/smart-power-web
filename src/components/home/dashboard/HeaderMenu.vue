@@ -3,7 +3,7 @@ import {defineComponent, ref} from 'vue'
 import {message} from "ant-design-vue";
 import {DashboardOutlined} from "@ant-design/icons-vue";
 import $ from "jquery";
-import DashboardMenu from "@/components/DashboardMenu.vue";
+import DashboardMenu from "@/components/home/DashboardMenu.vue";
 
 export default defineComponent({
   name: "HeaderMenu",
@@ -22,6 +22,13 @@ export default defineComponent({
       this.getFirstLetterCapitalized = getFirstLetter.data?.user.username.charAt(0).toUpperCase()
     }
     $("#DashboardMenu").toggleClass("invisible").fadeOut(0)
+    // 检查当前 URI
+    const currentURI = this.$route.name
+    if (currentURI === "DashHome") {
+      this.menuActiveNumber = "dashboard"
+    } else if (currentURI === "DashAccount") {
+      this.menuActiveNumber = "account"
+    }
   },
   mounted() {
     let timeoutID: number | null = null;
@@ -52,6 +59,16 @@ export default defineComponent({
     },
     activeNumber(menuID: string): boolean {
       return this.menuActiveNumber === menuID
+    }
+  },
+  watch: {
+    $route(to) {
+      const currentURI = to.name
+      if (currentURI === "DashHome") {
+        this.menuActiveNumber = "dashboard"
+      } else if (currentURI === "DashAccount") {
+        this.menuActiveNumber = "account"
+      }
     }
   }
 })
@@ -92,7 +109,7 @@ export default defineComponent({
               <li>
                 <a id="Account"
                    :class="{ 'bg-blue-50': activeNumber('account'), 'text-blue-700': activeNumber('account'), 'text-gray-500': !activeNumber('account')}"
-                   class="group relative flex justify-center rounded px-2 py-1.5 text-gray-500"
+                   class="group relative flex justify-center rounded px-2 py-1.5"
                    @click="menuActive('account', 'DashAccount')"
                 >
                   <svg
