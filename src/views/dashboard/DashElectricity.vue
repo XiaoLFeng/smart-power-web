@@ -110,16 +110,18 @@ export default defineComponent({
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ value.updated_at }}</td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-end">
                   <span class="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
-                    <button class="py-1 px-3 text-gray-700 hover:bg-gray-50 focus:relative flex items-center"
-                            @click="() => {modalCheck = true; modalCheckUUID = value.ce_uuid}">
+                    <button
+                        class="transition py-1 px-3 text-gray-700 hover:bg-gray-50 focus:relative flex items-center"
+                        @click="() => {modalCheck = true; modalCheckUUID = value.ce_uuid}">
                       <EyeOutlined/>
                     </button>
-                    <button class="border-x py-1 px-3 text-gray-700 hover:bg-gray-50 focus:relative flex items-center"
-                            @click="() => {modalEdit = true; modalCheckUUID = value.ce_uuid}">
+                    <button
+                        class="transition border-x py-1 px-3 text-gray-700 hover:bg-gray-50 focus:relative flex items-center"
+                        @click="() => {modalEdit = true; modalCheckUUID = value.ce_uuid}">
                       <EditOutlined/>
                     </button>
                     <button
-                        class="py-1 px-3 text-gray-700 hover:bg-red-200 focus:relative flex items-center bg-red-100"
+                        class="transition py-1 px-3 text-gray-700 hover:bg-red-200 focus:relative flex items-center bg-red-100"
                         @click="() => {modalDelete = true; modalCheckUUID = value.ce_uuid}">
                       <DeleteOutlined/>
                     </button>
@@ -158,7 +160,7 @@ export default defineComponent({
             </button>
           </div>
         </div>
-        <hr class="mx-10" />
+        <hr class="mx-10"/>
         <div class="grid gap-3 mt-4">
           <div
               class="flex justify-center rounded-lg p-2 shadow-sm shadow-indigo-100 bg-gradient-to-tr from-blue-200/25 to-blue-400/25">

@@ -109,11 +109,49 @@ function ElectricityAddAPI(sendData: ElectricityAddDTO): Promise<BaseResponse<nu
     );
 }
 
+/**
+ * # 电费费率添加
+ * 用作用户添加电费费率信息，用户执行该接口进行电费费率添加操作
+ *
+ * @param rateData 电费费率添加数据
+ * @returns Promise<BaseResponse<null>> 电费费率添加结果
+ */
+function ElectricityAddRateAPI(rateData: ElectricityRateAddDTO): Promise<BaseResponse<null>> {
+    return BaseApi<null>(
+        MethodType.POST,
+        "/api/v1/electric/rate",
+        rateData,
+        null,
+        null,
+        {Authorization: GetAuthorizationToken()}
+    );
+}
+
+/**
+ * # 电费费率编辑
+ * 用作用户编辑电费费率信息，用户执行该接口进行电费费率编辑操作
+ *
+ * @param rateData 电费费率编辑数据
+ * @returns Promise<BaseResponse<null>> 电费费率编辑结果
+ */
+function ElectricityEditRateAPI(rateData: ElectricityRateEditDTO): Promise<BaseResponse<null>> {
+    return BaseApi<null>(
+        MethodType.PUT,
+        "/api/v1/electric/rate",
+        rateData,
+        null,
+        null,
+        {Authorization: GetAuthorizationToken()}
+    );
+}
+
 export {
     ElectricityAllAPI,
     ElectricityGetRateAPI,
     ElectricityGetSingleAPI,
     ElectricityEditAPI,
     ElectricityDeleteAPI,
-    ElectricityAddAPI
+    ElectricityAddAPI,
+    ElectricityAddRateAPI,
+    ElectricityEditRateAPI
 }
