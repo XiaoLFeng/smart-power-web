@@ -8,11 +8,16 @@ export default defineComponent({
     // 检查用户是否登陆
     const getRes = await UserCurrentAPI();
     if (getRes.output === "Success") {
-      this.$router.replace({name: "DashHome", replace: true})
+      // 判断跳转位
+      if (getRes.data?.user.role === "admin") {
+        this.$router.replace({name: "ConsoleHome", replace: true});
+      } else {
+        this.$router.replace({name: "DashHome", replace: true});
+      }
     } else {
       // 获取 URI 地址
       if (this.$route.path === '/auth') {
-        this.$router.replace({name: "AuthLogin"})
+        this.$router.replace({name: "AuthLogin"});
       }
     }
   },

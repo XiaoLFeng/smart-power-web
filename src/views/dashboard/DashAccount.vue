@@ -16,12 +16,15 @@ export default defineComponent({
       editCompany: reactive<UserCompanyEditDTO>({} as UserCompanyEditDTO),
       changePassword: reactive<AuthPasswordDTO>({} as AuthPasswordDTO),
       reNewPassword: reactive<string>(),
+      hasConsole: false
     }
   },
   async created() {
+    document.title = '仪表盘 - 账户设置';
     // 获取当前用户信息
     const getRes = await this.UserCurrent();
     if (getRes.output === "Success") {
+      getRes.data?.user.role === "admin" ? this.hasConsole = true : this.hasConsole = false;
       this.editUser.email = getRes.data?.user.email;
       this.editUser.phone = getRes.data?.user.phone;
       this.editCompany.cods = getRes.data?.company.cods;
@@ -135,7 +138,7 @@ export default defineComponent({
         </div>
       </div>
 
-      <div class="h-full shadow shadow-indigo-100 rounded-lg bg-white p-8 col-span-12 grid grid-cols-12 gap-3">
+      <div class="h-full shadow shadow-indigo-100 rounded-lg bg-white p-8 col-span-12 grid grid-cols-12 gap-3" v-if="!hasConsole">
         <div class="text-2xl flex items-center font-bold col-span-12">
           <MoneyCollectOutlined class="pe-3"/>
           <span>编辑企业信息</span>

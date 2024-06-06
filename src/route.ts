@@ -49,6 +49,48 @@ const router = createRouter({
                     path: 'account',
                     name: 'DashAccount',
                     component: () => import('@/views/dashboard/DashAccount.vue')
+                },
+                {
+                    path: 'help',
+                    name: 'DashUseHelp',
+                    component: () => import('@/views/dashboard/DashUseHelp.vue')
+                }
+            ]
+        },
+        {
+            path: '/console',
+            name: 'BaseConsole',
+            component: () => import('@/views/BaseConsole.vue'),
+            children: [
+                {
+                    path: 'home',
+                    name: 'ConsoleHome',
+                    component: () => import('@/views/console/ConsoleHome.vue')
+                },
+                {
+                    path: 'user',
+                    name: 'ConsoleUser',
+                    component: () => import('@/views/console/ConsoleUser.vue')
+                },
+                {
+                    path: 'electricity',
+                    name: 'ConsoleElectricity',
+                    component: () => import('@/views/console/ConsoleElectricity.vue')
+                },
+                {
+                    path: 'price',
+                    name: 'ConsolePrice',
+                    component: () => import('@/views/console/ConsolePrice.vue')
+                },
+                {
+                    path: 'account',
+                    name: 'ConsoleAccount',
+                    component: () => import('@/views/dashboard/DashAccount.vue')
+                },
+                {
+                    path: 'help',
+                    name: 'ConsoleUseHelp',
+                    component: () => import('@/views/console/ConsoleUseHelp.vue')
                 }
             ]
         }

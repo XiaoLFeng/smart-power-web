@@ -10,7 +10,7 @@ export default defineComponent({
   },
   data() {
       return {
-        formData: ref<AuthLoginDTO>({} as AuthLoginDTO)
+        formData: ref<AuthLoginDTO>({} as AuthLoginDTO),
       }
   },
   methods: {
@@ -18,15 +18,20 @@ export default defineComponent({
       const getRes = await AuthLoginAPI(this.formData);
       if (getRes.output === "Success") {
         // 用户登录成功
-        message.success("您好 " + getRes.data?.user.username + " 欢迎回来")
+        message.success("您好 " + getRes.data?.user.username + " 欢迎回来");
         // 设置用户已登录
-        localStorage.setItem("authorization", "Bearer " + getRes.data?.token)
+        localStorage.setItem("authorization", "Bearer " + getRes.data?.token);
         setTimeout(() => {
-          this.$router.push({name: "DashHome", replace: true})
-        }, 500)
+          // 检查用户角色
+          if (getRes.data?.user.role === "admin") {
+            this.$router.push({name: "ConsoleHome", replace: true});
+          } else {
+            this.$router.push({name: "DashHome", replace: true});
+          }
+        }, 500);
       } else {
         // 用户登录失败
-        message.warn(getRes.error_message)
+        message.warn(getRes.error_message);
       }
     }
   }
