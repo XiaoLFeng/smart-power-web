@@ -3,14 +3,35 @@ import {defineComponent} from 'vue'
 import {DeleteOutlined, EditOutlined, EyeOutlined, KeyOutlined, UserOutlined} from "@ant-design/icons-vue";
 import {ConsoleGetUserList} from "@/apis/ConsoleApi";
 import AddUser from "@/components/console/user/modals/AddUser.vue";
+import ResetPassword from "@/components/console/user/modals/ResetPassword.vue";
+import DeleteUser from "@/components/console/user/modals/DeleteUser.vue";
+import GetUser from "@/components/console/user/modals/GetUser.vue";
+import EditUser from "@/components/console/user/modals/EditUser.vue";
 
 export default defineComponent({
   name: "ConsoleUser",
-  components: {AddUser, DeleteOutlined, EyeOutlined, EditOutlined, UserOutlined, KeyOutlined},
+  components: {
+    EditUser,
+    GetUser,
+    DeleteUser,
+    ResetPassword,
+    AddUser,
+    DeleteOutlined,
+    EyeOutlined,
+    EditOutlined,
+    UserOutlined,
+    KeyOutlined
+  },
   data() {
     return {
+      getUserUUID: "",
+      userInfo: {} as UserCurrentEntity,
       getUserList: {} as UserAllEntity,
+      getUserModal: false,
       addUserModal: false,
+      resetUserModal: false,
+      editUserModal: false,
+      deleteUserModal: false,
       isNew: false,
     }
   },
@@ -21,6 +42,16 @@ export default defineComponent({
       this.getUserList = getRes.data!!;
     }
   },
+  watch: {
+    async isNew(val) {
+      if (val) {
+        const getRes = await ConsoleGetUserList();
+        if (getRes.output === "Success") {
+          this.getUserList = getRes.data!!;
+        }
+      }
+    }
+  }
 })
 </script>
 
@@ -62,22 +93,22 @@ export default defineComponent({
             <span class="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
               <button
                   class="transition py-1 px-3 text-gray-700 hover:bg-gray-50 focus:relative flex items-center"
-                  @click="false">
+                  @click="() => {getUserModal = true; userInfo = value}">
                 <EyeOutlined/>
               </button>
               <button
                   class="transition border-s py-1 px-3 text-gray-700 hover:bg-gray-50 focus:relative flex items-center"
-                  @click="false">
+                  @click="() => {editUserModal = true; userInfo = value}">
                 <EditOutlined/>
               </button>
               <button
                   class="transition border-x py-1 px-3 text-gray-700 hover:bg-gray-50 focus:relative flex items-center"
-                  @click="false">
+                  @click="() => {resetUserModal = true; getUserUUID = value.user.uuid}">
                 <KeyOutlined/>
               </button>
               <button
                   class="transition py-1 px-3 text-gray-700 hover:bg-red-200 focus:relative flex items-center bg-red-100"
-                  @click="false">
+                  @click="() => {deleteUserModal = true; getUserUUID = value.user.uuid}">
                 <DeleteOutlined/>
               </button>
             </span>
@@ -92,5 +123,27 @@ export default defineComponent({
       :show-modal="addUserModal"
       @isNew="(val) => isNew = val"
       @updateModal="(val) => addUserModal = val"
+  />
+  <ResetPassword
+      :get-uuid="getUserUUID"
+      :show-modal="resetUserModal"
+      @updateModal="(val) => resetUserModal = val"
+  />
+  <DeleteUser
+      :get-uuid="getUserUUID"
+      :show-modal="deleteUserModal"
+      @isNew="(val) => isNew = val"
+      @updateModal="(val) => deleteUserModal = val"
+  />
+  <GetUser
+      :get-user="userInfo"
+      :show-modal="getUserModal"
+      @updateModal="(val) => getUserModal = val"
+  />
+  <EditUser
+      :get-user="userInfo"
+      :show-modal="editUserModal"
+      @isNew="(val) => isNew = val"
+      @updateModal="(val) => editUserModal = val"
   />
 </template>

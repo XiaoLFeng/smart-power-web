@@ -1,68 +1,69 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import {ConsoleUserAddAPI} from "@/apis/ConsoleApi";
-import {message, notification} from "ant-design-vue";
+import {ConsoleUserEditAPI} from "@/apis/ConsoleApi";
+import {message} from "ant-design-vue";
 
 export default defineComponent({
-  name: "AddUser",
+  name: "EditUser",
   props: {
     showModal: Boolean,
+    getUser: Object,
   },
   data() {
     return {
       open: false,
-      addUser: {} as ConsoleUserAddDTO,
+      user: {} as ConsoleUserEditDTO,
     }
   },
   methods: {
     async formSubmit() {
-      const getRes = await ConsoleUserAddAPI(this.addUser);
+      const getRes = await ConsoleUserEditAPI(this.user);
       if (getRes.output === "Success") {
+        message.success("修改成功");
         this.open = false;
         this.$emit('updateModal', false);
         this.$emit('isNew', true);
-        // 显示添加成功的密码
-        notification.open({
-          message: `用户 ${getRes.data?.user.username} 创建成功`,
-          description: `创建用户的密码：${getRes.data?.password}`,
-        });
       } else {
         message.error(getRes.error_message);
       }
     }
   },
   watch: {
-    showModal: function (val) {
+    showModal(val: UserCurrentEntity) {
       if (val) {
         this.open = true;
       }
     },
-    open: function (val) {
+    open(val) {
       if (val) {
         this.$emit('updateModal', false);
       }
     },
-    "addUser.has_admin": function (val) {
-      if (val) {
-        this.addUser.company = "";
-        this.addUser.company_cods = "";
-        this.addUser.company_address = "";
-      }
+    getUser(val: UserCurrentEntity) {
+      this.user.uuid = val.user.uuid;
+      this.user.username = val.user.username;
+      this.user.email = val.user.email;
+      this.user.phone = val.user.phone;
+      this.user.company = val.company.name;
+      this.user.company_cods = val.company.cods;
+      this.user.company_address = val.company.address;
+      this.user.representative = val.company.representative;
+      this.user.has_admin = val.user.role === "admin";
     }
   }
 })
 </script>
 
 <template>
-  <a-modal v-model:open="open" title="添加用户">
+  <a-modal v-model:open="open" title="编辑用户">
     <form class="grid gap-3 pt-4">
       <div class="grid grid-cols-10 items-center justify-end text-end gap-3">
-        <div class="text-lg text-gray-700 col-span-8">创建管理员账户</div>
+        <div class="text-lg text-gray-700 col-span-8">管理员</div>
         <label
             class="inline-block col-span-2 relative h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-blue-500"
             for="HasAdmin"
         >
-          <input id="HasAdmin" v-model="addUser.has_admin" class="peer sr-only" type="checkbox"/>
+          <input id="HasAdmin" v-model="user.has_admin" class="peer sr-only" type="checkbox"/>
           <span
               class="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"
           />
@@ -73,7 +74,7 @@ export default defineComponent({
           for="username"
       >
         <input id="username"
-               v-model="addUser.username"
+               v-model="user.username"
                class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 w-full"
                placeholder="username"
                type="text"
@@ -88,7 +89,7 @@ export default defineComponent({
           for="email"
       >
         <input id="email"
-               v-model="addUser.email"
+               v-model="user.email"
                class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 w-full"
                placeholder="email"
                type="email"
@@ -103,7 +104,7 @@ export default defineComponent({
           for="phone"
       >
         <input id="phone"
-               v-model="addUser.phone"
+               v-model="user.phone"
                class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 w-full"
                placeholder="phone"
                type="text"
@@ -114,12 +115,12 @@ export default defineComponent({
         </span>
       </label>
       <label
-          v-if="!addUser.has_admin"
+          v-if="!user.has_admin"
           class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
           for="company"
       >
         <input id="company"
-               v-model="addUser.company"
+               v-model="user.company"
                class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 w-full"
                placeholder="company"
                type="text"
@@ -130,12 +131,12 @@ export default defineComponent({
         </span>
       </label>
       <label
-          v-if="!addUser.has_admin"
+          v-if="!user.has_admin"
           class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
           for="companyCods"
       >
         <input id="companyCods"
-               v-model="addUser.company_cods"
+               v-model="user.company_cods"
                class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 w-full"
                placeholder="companyCods"
                type="text"
@@ -146,12 +147,12 @@ export default defineComponent({
         </span>
       </label>
       <label
-          v-if="!addUser.has_admin"
+          v-if="!user.has_admin"
           class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
           for="companyAddress"
       >
         <input id="companyAddress"
-               v-model="addUser.company_address"
+               v-model="user.company_address"
                class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 w-full"
                placeholder="companyAddress"
                type="text"
@@ -162,12 +163,12 @@ export default defineComponent({
         </span>
       </label>
       <label
-          v-if="!addUser.has_admin"
+          v-if="!user.has_admin"
           class="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
           for="companyRepresentative"
       >
         <input id="companyAddress"
-               v-model="addUser.representative"
+               v-model="user.representative"
                class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 w-full"
                placeholder="companyRepresentative"
                type="text"
@@ -182,7 +183,7 @@ export default defineComponent({
       <button
           class="transition border border-blue-400 text-blue-400 px-4 py-1 rounded-lg hover:border-blue-500 hover:text-blue-500 hover:scale-105 hover:shadow"
           @click="formSubmit()">
-        添加
+        修改
       </button>
     </template>
   </a-modal>

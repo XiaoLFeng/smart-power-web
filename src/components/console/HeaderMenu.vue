@@ -94,7 +94,7 @@ export default defineComponent({
         </li>
         <li>
           <span
-              :class="{'bg-gray-100': activeNumber('ConsoleUseHelp'), 'hover:bg-gray-50': !activeNumber('ConsoleUseHelp')}"
+              :class="{'bg-gray-100': activeNumber('HowToUse'), 'hover:bg-gray-50': !activeNumber('HowToUse')}"
               class="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 flex items-center"
               @click="$router.push({name: 'ConsoleUseHelp'})">
             <MessageOutlined/>

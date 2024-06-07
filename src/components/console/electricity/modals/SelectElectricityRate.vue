@@ -66,7 +66,3 @@ export default defineComponent({
     </template>
   </a-modal>
 </template>
-
-<style scoped>
-
-</style>

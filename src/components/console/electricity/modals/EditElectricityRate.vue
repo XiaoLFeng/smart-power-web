@@ -7,7 +7,7 @@ export default defineComponent({
   name: "EditElectricityRate",
   props: {
     showModal: Boolean,
-    rateEntity: {} as RateEntity,
+    rateEntity: Object,
   },
   data() {
     return {
@@ -20,12 +20,12 @@ export default defineComponent({
     async formSubmit() {
       // 检查输入
       if (this.editRateEntity.valley_rate == null || this.editRateEntity.peak_rate == null) {
-        this.$message.warn("电价不能为空");
+        message.warn("电价不能为空");
         return
       }
       // 不能为 0
       if (this.editRateEntity.valley_rate === 0 || this.editRateEntity.peak_rate === 0) {
-        this.$message.warn("电价不能为 0");
+        message.warn("电价不能为 0");
         return
       }
       // 记录本月
@@ -118,7 +118,3 @@ export default defineComponent({
     </template>
   </a-modal>
 </template>
-
-<style scoped>
-
-</style>
