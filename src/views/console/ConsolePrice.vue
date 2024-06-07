@@ -160,7 +160,3 @@ export default defineComponent({
       @updateModal="(val) => deleteRateModal = val"
   />
 </template>
-
-<style scoped>
-
-</style>

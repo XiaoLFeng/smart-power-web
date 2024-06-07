@@ -43,7 +43,7 @@ export default defineComponent({
     },
     electricity(val) {
       this.getElectricity = val;
-      if (this.getElectricity.electricity.length === 0) {
+      if (this.getElectricity.electricity === null) {
         this.calculateElectricity = 0.0
         this.calculateElectricityBill = 0.0
       } else {

@@ -27,7 +27,8 @@ export default defineComponent({
       const getRes = await ElectricityAllAPI();
       if (getRes.output === "Success") {
         this.getElectricity = getRes.data!!;
-        if (this.getElectricity.electricity.length === 0) {
+        console.log(this.getElectricity);
+        if (this.getElectricity.electricity === null) {
           this.calculateElectricity = 0.0;
           this.calculateElectricityBill = 0.0;
         } else {

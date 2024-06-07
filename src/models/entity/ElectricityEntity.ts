@@ -21,7 +21,7 @@ type ElectricityEntity = {
 type ElectricityAllEntity = {
     company: CompanyEntity;
     total: number;
-    electricity: ElectricityEntity[];
+    electricity: ElectricityEntity[] | null;
 };
 
 type ElectricitySingleEntity = {
