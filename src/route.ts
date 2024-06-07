@@ -52,8 +52,8 @@ const router = createRouter({
                 },
                 {
                     path: 'help',
-                    name: 'DashUseHelp',
-                    component: () => import('@/views/dashboard/DashUseHelp.vue')
+                    name: 'HowToUse',
+                    component: () => import('@/views/HowToUse.vue')
                 }
             ]
         },
@@ -89,8 +89,8 @@ const router = createRouter({
                 },
                 {
                     path: 'help',
-                    name: 'ConsoleUseHelp',
-                    component: () => import('@/views/console/ConsoleUseHelp.vue')
+                    name: 'HowToUse',
+                    component: () => import('@/views/HowToUse.vue')
                 }
             ]
         }

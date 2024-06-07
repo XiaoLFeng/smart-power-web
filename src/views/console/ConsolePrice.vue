@@ -1,12 +1,12 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import AddThisMonthElectricityPrice from "@/components/console/modals/AddThisMonthElectricityPrice.vue";
+import AddThisMonthElectricityPrice from "@/components/console/electricity/modals/AddThisMonthElectricityPrice.vue";
 import {ElectricityGetRateAPI} from "@/apis/ElectricityApi";
 import {DeleteOutlined, EditOutlined, EyeOutlined, MoneyCollectOutlined} from "@ant-design/icons-vue";
-import EditElectricityRate from "@/components/console/modals/EditElectricityRate.vue";
-import SelectElectricityRate from "@/components/console/modals/SelectElectricityRate.vue";
-import AddRateModal from "@/components/console/modals/AddRateModal.vue";
-import DeleteElectricityRate from "@/components/console/modals/DeleteElectricityRate.vue";
+import EditElectricityRate from "@/components/console/electricity/modals/EditElectricityRate.vue";
+import SelectElectricityRate from "@/components/console/electricity/modals/SelectElectricityRate.vue";
+import AddRateModal from "@/components/console/electricity/modals/AddRateModal.vue";
+import DeleteElectricityRate from "@/components/console/electricity/modals/DeleteElectricityRate.vue";
 
 export default defineComponent({
   name: "ConsolePrice",
