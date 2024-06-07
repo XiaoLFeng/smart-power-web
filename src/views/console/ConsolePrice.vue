@@ -5,10 +5,12 @@ import {ElectricityGetRateAPI} from "@/apis/ElectricityApi";
 import {DeleteOutlined, EditOutlined, EyeOutlined, MoneyCollectOutlined} from "@ant-design/icons-vue";
 import EditElectricityRate from "@/components/console/modals/EditElectricityRate.vue";
 import SelectElectricityRate from "@/components/console/modals/SelectElectricityRate.vue";
+import AddRateModal from "@/components/console/modals/AddRateModal.vue";
 
 export default defineComponent({
   name: "ConsolePrice",
   components: {
+    AddRateModal,
     SelectElectricityRate,
     EditElectricityRate,
     EditOutlined, DeleteOutlined, EyeOutlined, AddThisMonthElectricityPrice, MoneyCollectOutlined
@@ -19,6 +21,7 @@ export default defineComponent({
       rateList: {} as RateDataEntity,
       selectModal: false,
       addThisMonthRateModal: false,
+      addRateModal: false,
       editRateModal: false,
       rateData: {} as RateEntity,
     }
@@ -117,7 +120,7 @@ export default defineComponent({
             </button>
             <button
                 class="inline-block rounded border border-current w-full py-2 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
-                @click="$router.push({name: 'DashAccount'})"
+                @click="addRateModal = true"
             >
               补充其余电价
             </button>
@@ -127,14 +130,19 @@ export default defineComponent({
     </div>
   </div>
   <SelectElectricityRate
-      :show-modal="selectModal"
       :get-rate="rateData"
+      :show-modal="selectModal"
       @updateModal="(val) => selectModal = val"
   />
   <AddThisMonthElectricityPrice
       :show-modal="addThisMonthRateModal"
       @isNew="(val) => isNew = val"
       @updateModal="(val) => addThisMonthRateModal = val"
+  />
+  <AddRateModal
+      :show-modal="addRateModal"
+      @isNew="(val) => isNew = val"
+      @updateModal="(val) => addRateModal = val"
   />
   <EditElectricityRate
       :rate-entity="rateData"
