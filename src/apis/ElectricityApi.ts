@@ -145,6 +145,25 @@ function ElectricityEditRateAPI(rateData: ElectricityRateEditDTO): Promise<BaseR
     );
 }
 
+/**
+ * # 电费费率删除
+ * 用作用户删除电费费率信息，用户执行该接口进行电费费率删除操作
+ *
+ * @param rateID 电费费率主键 ID
+ * @returns Promise<BaseResponse<null>> 电费费率删除结果
+ */
+function ElectricityDeleteRateAPI(rateID: string): Promise<BaseResponse<null>> {
+    return BaseApi<null>(
+        MethodType.DELETE,
+        "/api/v1/electric/rate",
+        null,
+        {id: rateID},
+        null,
+        {Authorization: GetAuthorizationToken()}
+    );
+
+}
+
 export {
     ElectricityAllAPI,
     ElectricityGetRateAPI,
@@ -153,5 +172,6 @@ export {
     ElectricityDeleteAPI,
     ElectricityAddAPI,
     ElectricityAddRateAPI,
-    ElectricityEditRateAPI
+    ElectricityEditRateAPI,
+    ElectricityDeleteRateAPI
 }

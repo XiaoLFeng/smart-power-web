@@ -6,10 +6,12 @@ import {DeleteOutlined, EditOutlined, EyeOutlined, MoneyCollectOutlined} from "@
 import EditElectricityRate from "@/components/console/modals/EditElectricityRate.vue";
 import SelectElectricityRate from "@/components/console/modals/SelectElectricityRate.vue";
 import AddRateModal from "@/components/console/modals/AddRateModal.vue";
+import DeleteElectricityRate from "@/components/console/modals/DeleteElectricityRate.vue";
 
 export default defineComponent({
   name: "ConsolePrice",
   components: {
+    DeleteElectricityRate,
     AddRateModal,
     SelectElectricityRate,
     EditElectricityRate,
@@ -23,6 +25,7 @@ export default defineComponent({
       addThisMonthRateModal: false,
       addRateModal: false,
       editRateModal: false,
+      deleteRateModal: false,
       rateData: {} as RateEntity,
     }
   },
@@ -86,17 +89,17 @@ export default defineComponent({
                   <span class="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
                     <button
                         class="transition py-1 px-3 text-gray-700 hover:bg-gray-50 focus:relative flex items-center"
-                        @click="() => {selectModal = true; rateData= value;}">
+                        @click="() => {selectModal = true; rateData = value;}">
                       <EyeOutlined/>
                     </button>
                     <button
                         class="transition border-x py-1 px-3 text-gray-700 hover:bg-gray-50 focus:relative flex items-center"
-                        @click="() => {editRateModal = true; rateData= value;}">
+                        @click="() => {editRateModal = true; rateData = value;}">
                       <EditOutlined/>
                     </button>
                     <button
                         class="transition py-1 px-3 text-gray-700 hover:bg-red-200 focus:relative flex items-center bg-red-100"
-                        @click="false">
+                        @click="() => {deleteRateModal = true; rateData = value}">
                       <DeleteOutlined/>
                     </button>
                   </span>
@@ -149,6 +152,12 @@ export default defineComponent({
       :show-modal="editRateModal"
       @isNew="(val) => isNew = val"
       @updateModal="(val) => editRateModal = val"
+  />
+  <DeleteElectricityRate
+      :rate-entity="rateData"
+      :show-modal="deleteRateModal"
+      @isNew="(val) => isNew = val"
+      @updateModal="(val) => deleteRateModal = val"
   />
 </template>
 
