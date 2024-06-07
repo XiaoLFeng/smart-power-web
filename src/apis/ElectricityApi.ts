@@ -161,7 +161,24 @@ function ElectricityDeleteRateAPI(rateID: string): Promise<BaseResponse<null>> {
         null,
         {Authorization: GetAuthorizationToken()}
     );
+}
 
+/**
+ * # 电费区域查询
+ * 用作用户查询电费区域信息，用户执行该接口进行电费区域查询操作
+ *
+ * @param data 电费区域查询数据
+ * @returns Promise<BaseResponse<ElectricityRegionEntity>> 电费区域信息
+ */
+function ElectricityGetRegionAPI(data: ElectricityRegionDTO): Promise<BaseResponse<ElectricityRegionEntity>> {
+    return BaseApi<ElectricityRegionEntity>(
+        MethodType.GET,
+        "/api/v1/electric/region",
+        null,
+        data,
+        null,
+        {Authorization: GetAuthorizationToken()}
+    );
 }
 
 export {
@@ -173,5 +190,6 @@ export {
     ElectricityAddAPI,
     ElectricityAddRateAPI,
     ElectricityEditRateAPI,
-    ElectricityDeleteRateAPI
+    ElectricityDeleteRateAPI,
+    ElectricityGetRegionAPI
 }

@@ -23,5 +23,5 @@ type UserCurrentEntity = {
  * 用作获取所有用户信息, 用于管理员查看
  */
 type UserAllEntity = {
-    list: UserCurrentEntity[]
+    list: UserCurrentEntity[] | null
 }

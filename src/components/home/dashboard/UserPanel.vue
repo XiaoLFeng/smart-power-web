@@ -6,7 +6,7 @@ export default defineComponent({
   name: "UserPanel",
   inject: ["CUserCurrent"],
   props: {
-    electricity: {} as ElectricityAllEntity,
+    electricity: Object,
     showModal: Boolean,
   },
   data() {
@@ -25,15 +25,9 @@ export default defineComponent({
         this.getUserCurrent = getRes.data!!
       }
     }
-    this.getElectricity = this.electricity.value;
+    this.getElectricity = this.electricity as ElectricityAllEntity;
   },
   watch: {
-    async hasUpdate(val) {
-      if (val) {
-        await this.getElectricityFunc();
-        this.hasUpdate = false;
-      }
-    },
     showModal(val) {
       this.open = val;
     },
@@ -67,7 +61,7 @@ export default defineComponent({
       <img
           alt=""
           class="w-40 h-40 rounded-full object-cover"
-          src="../../../assets/images/my_logo_image.png"
+          src="@/assets/images/my_logo_image.png"
       />
     </div>
     <hr/>

@@ -2,6 +2,7 @@
 import {defineComponent} from 'vue'
 import {message} from "ant-design-vue";
 import {
+  CalculatorOutlined,
   DashboardOutlined,
   MessageOutlined,
   ThunderboltOutlined,
@@ -11,7 +12,14 @@ import {
 
 export default defineComponent({
   name: "HeaderMenu",
-  components: {UserOutlined, UsergroupAddOutlined, ThunderboltOutlined, DashboardOutlined, MessageOutlined},
+  components: {
+    UserOutlined,
+    UsergroupAddOutlined,
+    ThunderboltOutlined,
+    DashboardOutlined,
+    MessageOutlined,
+    CalculatorOutlined
+  },
   inject: ['UserCurrent'],
   data() {
     return {
@@ -26,7 +34,7 @@ export default defineComponent({
       const getRes = await this.UserCurrent();
       this.getUserCurrent = getRes.data;
     }
-    this.menuActiveNumber = this.$router.currentRoute.value.name;
+    this.menuActiveNumber = this.$router.currentRoute.value.name as string;
   },
   methods: {
     logoutSubmit() {
@@ -76,6 +84,15 @@ export default defineComponent({
         </li>
         <li>
           <span
+              :class="{'bg-gray-100': activeNumber('ConsolePriceCalc'), 'hover:bg-gray-50': !activeNumber('ConsolePriceCalc')}"
+              class="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 flex items-center"
+              @click="$router.push({name: 'ConsolePriceCalc'})">
+            <CalculatorOutlined/>
+            <span class="ps-3">电费区域计算</span>
+          </span>
+        </li>
+        <li>
+          <span
               :class="{'bg-gray-100': activeNumber('ConsoleUser'), 'hover:bg-gray-50': !activeNumber('ConsoleUser')}"
               class="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 flex items-center"
               @click="$router.push({name: 'ConsoleUser'})">
@@ -94,9 +111,9 @@ export default defineComponent({
         </li>
         <li>
           <span
-              :class="{'bg-gray-100': activeNumber('HowToUse'), 'hover:bg-gray-50': !activeNumber('HowToUse')}"
+              :class="{'bg-gray-100': activeNumber('ConsoleHowToUse'), 'hover:bg-gray-50': !activeNumber('ConsoleHowToUse')}"
               class="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 flex items-center"
-              @click="$router.push({name: 'ConsoleUseHelp'})">
+              @click="$router.push({name: 'ConsoleHowToUse'})">
             <MessageOutlined/>
             <span class="ps-3">使用帮助</span>
           </span>

@@ -52,7 +52,7 @@ const router = createRouter({
                 },
                 {
                     path: 'help',
-                    name: 'HowToUse',
+                    name: 'DashHowToUse',
                     component: () => import('@/views/HowToUse.vue')
                 }
             ]
@@ -83,13 +83,18 @@ const router = createRouter({
                     component: () => import('@/views/console/ConsolePrice.vue')
                 },
                 {
+                    path: 'calc',
+                    name: 'ConsolePriceCalc',
+                    component: () => import('@/views/console/ConsolePriceCalc.vue')
+                },
+                {
                     path: 'account',
                     name: 'ConsoleAccount',
                     component: () => import('@/views/dashboard/DashAccount.vue')
                 },
                 {
                     path: 'help',
-                    name: 'HowToUse',
+                    name: 'ConsoleHowToUse',
                     component: () => import('@/views/HowToUse.vue')
                 }
             ]

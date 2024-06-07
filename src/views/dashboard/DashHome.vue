@@ -47,7 +47,7 @@ export default defineComponent({
   async created() {
     if (typeof this.UserCurrent === "function") {
       const getRes = await this.UserCurrent() as BaseResponse<UserCurrentEntity>;
-      this.getUserCurrent = getRes.data;
+      this.getUserCurrent = getRes.data as UserCurrentEntity;
     }
     document.title = '仪表盘 - 你好' + this.getUserCurrent.user.username;
     await this.getElectricityFunc();
