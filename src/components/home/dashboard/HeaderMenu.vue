@@ -1,13 +1,13 @@
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
 import {message} from "ant-design-vue";
-import {DashboardOutlined} from "@ant-design/icons-vue";
+import {DashboardOutlined, MessageOutlined, UserOutlined} from "@ant-design/icons-vue";
 import $ from "jquery";
 import DashboardMenu from "@/components/home/DashboardMenu.vue";
 
 export default defineComponent({
   name: "HeaderMenu",
-  components: {DashboardMenu, DashboardOutlined},
+  components: {DashboardMenu, DashboardOutlined, UserOutlined, MessageOutlined},
   inject: ['UserCurrent'],
   data() {
     return {
@@ -112,25 +112,31 @@ export default defineComponent({
                    class="group relative flex justify-center rounded px-2 py-1.5"
                    @click="menuActive('account', 'DashAccount')"
                 >
-                  <svg
-                      class="size-5 opacity-75"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
-                  </svg>
+                  <div class="flex justify-center items-center text-lg">
+                    <UserOutlined />
+                  </div>
 
                   <span
                       class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible w-max"
                   >
                     账户
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a id="Account"
+                   :class="{ 'bg-blue-50': activeNumber('howToUse'), 'text-blue-700': activeNumber('howToUse'), 'text-gray-500': !activeNumber('howToUse')}"
+                   class="group relative flex justify-center rounded px-2 py-1.5"
+                   @click="menuActive('howToUse', 'DashHowToUse')"
+                >
+                  <div class="flex justify-center items-center text-lg">
+                    <MessageOutlined />
+                  </div>
+
+                  <span
+                      class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible w-max"
+                  >
+                    使用帮助
                   </span>
                 </a>
               </li>

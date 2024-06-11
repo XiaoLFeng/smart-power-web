@@ -28,6 +28,9 @@ export default defineComponent({
       endTime: ""
     }
   },
+  created() {
+    document.title = '仪表盘 - 电价区域计算';
+  },
   methods: {
     async getRegionFunc() {
       // 检查输入信息是否完整
@@ -121,43 +124,41 @@ export default defineComponent({
               <div class="text-sm text-gray-500 mb-3">区域统计</div>
               <div class="font-medium">对开销的内容进行统计</div>
             </div>
-            <div class="m-2 grid grid-cols-4 gap-3 text-xs">
+            <div class="m-2 grid grid-cols-3 gap-3 text-xs">
               <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
                 <div class="flex items-center">
                   <BorderOuterOutlined class="pe-1"/>
-                  <span>谷开销 <span class="font-medium">{{ getRegion.total_valley_bill }}</span> 元</span>
+                  <span>谷开销 <span class="font-medium">{{ getRegion.total_valley_bill.toFixed(2) }}</span> 元</span>
                 </div>
               </div>
               <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
                 <div class="flex items-center">
                   <CalendarOutlined class="pe-1"/>
-                  <span>峰开销 <span class="font-medium">{{ getRegion.total_peak_bill }}</span> 元</span>
+                  <span>峰开销 <span class="font-medium">{{ getRegion.total_peak_bill.toFixed(2) }}</span> 元</span>
                 </div>
               </div>
               <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
                 <div class="flex items-center">
                   <CalendarOutlined class="pe-1"/>
-                  <span>谷消耗 <span class="font-medium">{{ getRegion.total_valley_electricity }}</span> 度</span>
+                  <span>谷消耗 <span class="font-medium">{{ getRegion.total_valley_electricity.toFixed(2) }}</span> 度</span>
                 </div>
               </div>
               <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
                 <div class="flex items-center">
                   <CalendarOutlined class="pe-1"/>
-                  <span>峰消耗 <span class="font-medium">{{ getRegion.total_peak_electricity }}</span> 度</span>
+                  <span>峰消耗 <span class="font-medium">{{ getRegion.total_peak_electricity.toFixed(2) }}</span> 度</span>
                 </div>
               </div>
-            </div>
-            <div class="m-2 grid grid-cols-4 gap-3 text-xs">
               <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
                 <div class="flex items-center">
                   <BorderOuterOutlined class="pe-1"/>
-                  <span>总消耗 <span class="font-medium">{{ getRegion.total_electricity }}</span> 度</span>
+                  <span>总消耗 <span class="font-medium">{{ getRegion.total_electricity.toFixed(2) }}</span> 度</span>
                 </div>
               </div>
               <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
                 <div class="flex items-center">
                   <CalendarOutlined class="pe-1"/>
-                  <span>总开销 <span class="font-medium">{{ getRegion.total_bill }}</span> 元</span>
+                  <span>总开销 <span class="font-medium">{{ getRegion.total_bill.toFixed(2) }}</span> 元</span>
                 </div>
               </div>
             </div>
