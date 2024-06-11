@@ -25,7 +25,7 @@ function UserCurrentAPI(): Promise<BaseResponse<UserCurrentEntity>> {
  * @param data UserEditDTO 用户信息
  * @returns Promise<BaseResponse<null>> 修改结果
  */
-function UserEditAPI(data: UserEditDTO): Promise<BaseResponse<null>> {
+function UserEditAPI(data: UserAccountEditDTO): Promise<BaseResponse<null>> {
     return BaseApi<null>(
         MethodType.PUT,
         "/api/v1/user/profile",

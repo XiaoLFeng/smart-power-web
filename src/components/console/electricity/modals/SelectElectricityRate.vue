@@ -5,7 +5,7 @@ export default defineComponent({
   name: "SelectElectricityRate",
   props: {
     showModal: Boolean,
-    getRate: {} as RateEntity,
+    getRate: Object,
   },
   data() {
     return {

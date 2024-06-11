@@ -23,7 +23,7 @@ export default defineComponent({
         this.hasRate = false;
       } else {
         this.hasRate = true;
-        getRes.data!!.rate.forEach((item: RateEntity) => {
+        getRes.data!!.rate?.forEach((item: RateEntity) => {
           const date = new Date();
           if (item.periodAt === `${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}`) {
             this.getRate = item;

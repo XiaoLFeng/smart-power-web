@@ -37,7 +37,7 @@ export default defineComponent({
     async getRateList() {
       const getRes = await ElectricityGetRateAPI();
       if (getRes.output === "Success") {
-        this.rateList = getRes.data;
+        this.rateList = getRes.data!!;
       }
     }
   },

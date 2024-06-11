@@ -7,7 +7,7 @@ export default defineComponent({
   name: "DeleteElectricityRate",
   props: {
     showModal: Boolean,
-    rateEntity: {} as RateEntity,
+    rateEntity: Object,
   },
   data() {
     return {
@@ -17,7 +17,7 @@ export default defineComponent({
   },
   methods: {
     async formSubmit() {
-      const getRes = await ElectricityDeleteRateAPI(this.getRateEntity.id);
+      const getRes = await ElectricityDeleteRateAPI(String(this.getRateEntity.id));
       if (getRes.output === "Success") {
         message.success("删除成功");
         this.$emit("updateModal", false);

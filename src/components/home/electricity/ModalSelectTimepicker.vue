@@ -15,7 +15,7 @@ export default defineComponent({
       open: false,
       hasSelect: false,
       getElectricity: {} as ElectricitySingleEntity,
-      timeoutID: null,
+      timeoutID: 0,
       timePicker: 0,
       loading: false
     }
@@ -23,7 +23,6 @@ export default defineComponent({
   methods: {
     closeModal() {
       this.open = false;
-      this.$emit("updateModal", val);
     },
   },
   watch: {
@@ -43,7 +42,7 @@ export default defineComponent({
       this.timeoutID = setTimeout(async () => {
         const getDate = new Date(val);
         const timepicker = getDate.getFullYear() + "-" + (getDate.getMonth() + 1) + "-01";
-        const getRes = await ElectricityGetSingleAPI(null, timepicker);
+        const getRes = await ElectricityGetSingleAPI("", timepicker);
         if (getRes.output === "Success") {
           this.getElectricity = getRes.data!!
           this.hasSelect = true

@@ -15,22 +15,24 @@ export default defineComponent({
       editUser: reactive<UserAccountEditDTO>({} as UserAccountEditDTO),
       editCompany: reactive<UserCompanyEditDTO>({} as UserCompanyEditDTO),
       changePassword: reactive<AuthPasswordDTO>({} as AuthPasswordDTO),
-      reNewPassword: reactive<string>(),
+      reNewPassword: "",
       hasConsole: false
     }
   },
   async created() {
     document.title = '仪表盘 - 账户设置';
-    // 获取当前用户信息
-    const getRes = await this.UserCurrent();
-    if (getRes.output === "Success") {
-      getRes.data?.user.role === "admin" ? this.hasConsole = true : this.hasConsole = false;
-      this.editUser.email = getRes.data?.user.email;
-      this.editUser.phone = getRes.data?.user.phone;
-      this.editCompany.cods = getRes.data?.company.cods;
-      this.editCompany.name = getRes.data?.company.name;
-      this.editCompany.address = getRes.data?.company.address;
-      this.editCompany.representative = getRes.data?.company.representative;
+    if (typeof this.UserCurrent === 'function') {
+      // 获取当前用户信息
+      const getRes = await this.UserCurrent();
+      if (getRes.output === "Success") {
+        getRes.data?.user.role === "admin" ? this.hasConsole = true : this.hasConsole = false;
+        this.editUser.email = getRes.data?.user.email;
+        this.editUser.phone = getRes.data?.user.phone;
+        this.editCompany.cods = getRes.data?.company.cods;
+        this.editCompany.name = getRes.data?.company.name;
+        this.editCompany.address = getRes.data?.company.address;
+        this.editCompany.representative = getRes.data?.company.representative;
+      }
     }
   },
   methods: {

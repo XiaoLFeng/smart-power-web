@@ -28,10 +28,10 @@ export default defineComponent({
     document.title = '仪表盘 - 电价概览';
     const getRes = await ElectricityGetRateAPI();
     if (getRes.output === "Success") {
-      this.getRateList = getRes.data;
+      this.getRateList = getRes.data!!;
       console.log(this.getThisMonth());
       // 循环遍历获取当前月份
-      this.getRateList.rate.forEach((item: RateEntity) => {
+      this.getRateList.rate?.forEach((item: RateEntity) => {
         if (item.periodAt === this.getThisMonth()) {
           this.thisMonthRate = item;
           this.hasThisMonthRate = true;

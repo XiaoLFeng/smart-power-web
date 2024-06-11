@@ -1,5 +1,5 @@
 <script lang="ts">
-import {defineComponent, reactive} from 'vue'
+import {defineComponent} from 'vue'
 import {ElectricityAllAPI} from "@/apis/ElectricityApi";
 import {DeleteOutlined, EditOutlined, EyeOutlined, MonitorOutlined} from "@ant-design/icons-vue";
 import ModalCheck from "@/components/home/electricity/ModalCheck.vue";
@@ -20,8 +20,8 @@ export default defineComponent({
   data() {
     return {
       getElectricity: {} as ElectricityAllEntity,
-      calculateElectricity: reactive<number>(0.0),
-      calculateElectricityBill: reactive<number>(0.0),
+      calculateElectricity: 0.0,
+      calculateElectricityBill: 0.0,
       modalAdd: false,
       modalAddTime: false,
       modalCheck: false,

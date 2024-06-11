@@ -17,7 +17,7 @@ export default defineComponent({
   methods: {
     async formSubmit() {
       if (this.addElectricity.valley_electricity === 0 && this.addElectricity.peak_electricity === 0) {
-        this.$message.warn("用电量不能同时为 0")
+        message.warn("用电量不能同时为 0")
         return
       }
       // 记录本月
