@@ -42,7 +42,7 @@ export default defineComponent({
             <span>课题名字：<b class="text-emerald-600">数据库技术设计题目（十一）： 用电管理系统</b></span>
             <span>系统名字：<b class="text-emerald-600">智电管家(SmartPower)</b></span>
             <span>作者：<a href="https://github.com/XiaoLFeng" class="transition font-bold text-cyan-500 hover:text-cyan-700">筱锋xiao_lfeng</a> (系统有开源在这里就不写真实名字了，该软件已申请软著，等待审核中)</span>
-            <span>软件著作权流水号： XXXXXXXXXX</span>
+            <span>软件著作权流水号：2024R11L1435128</span>
             <span>基础数据表要求：</span>
             <span class="ps-7">用电企业（企业编号、企业名称、地址、电话、联系人）</span>
             <span class="ps-7">电费信息（谷价、峰价）</span>

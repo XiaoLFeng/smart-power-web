@@ -1,39 +1,10 @@
 # smart-power-web
 
-This template should help get you started developing with Vue 3 in Vite.
+详细介绍请参考：https://github.com/XiaoLFeng/SmartPower
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+本项目已完成课程设计的要求，已完成所有的开发，不再进行维护。
+若对此项目有任何问题，欢迎通过邮箱联系我，我会尽快回复。
+请勿直接使用此项目，可能存在一些问题，不建议直接使用。
+也请勿将此项目直接用于商业活动，若有需要，请联系我并标明出处，谢谢🙏！若需要进行商业活动或修改后进行商业活动，请联系我。（我需要做一个知情的！）
